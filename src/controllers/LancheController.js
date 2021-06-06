@@ -1,4 +1,5 @@
 const Lanche = require('../database/models/lanches');
+const ComboController = require('./ComboController');
 
 module.exports = {
 
@@ -71,10 +72,13 @@ module.exports = {
 
         await Lanche.destroy({ where: { id: req.params.id } }).then(() => {
             return res.json({
+                error: false,
                 message: "LANCHE APAGADO COM SUCESSO!"
             })
         })
 
 
     },
+
+   
 }

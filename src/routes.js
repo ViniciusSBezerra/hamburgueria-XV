@@ -15,6 +15,8 @@ routes.delete("/deletarBebida/:id", bebidaController.deletarBebida),
 
 routes.post("/cadastrarCombo", comboController.cadastrarCombo),
 routes.get("/combos", comboController.listarCombos),
+routes.put("/alterarCombo/:id", comboController.alterarCombo),
+routes.delete("/deletarCombo/:id", comboController.deletatCombo),
 
 
 module.exports = routes;

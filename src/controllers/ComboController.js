@@ -65,5 +65,28 @@ module.exports = {
         });
     },
 
+    async deletatCombo(req, res) {
+        await Combo.destroy({where: { id: req.params.id}})
+        .then(()=>{
+            return res.json({
+                error: false,
+                message: "COMBO DELETADO COM SUCESSO!"
+            })
+        })
+    },
+
+    async alterarCombo(req, res){
+
+        const { name, lanche, batata, bebida, preco, descricao } = req.body;
+        
+        await Combo.update({name, lanche, batata, bebida, preco, descricao}, {
+            where: { id: req.params.id}
+        })
+        .then(() =>{
+            return res.json({
+                message: "COMBO ALTERADO COM SUCESSO!"
+            })
+        })
+    }
 
 }

@@ -1,22 +1,22 @@
 const routes = require('express').Router();
-const lancheController = require('./controllers/LancheController');
-const bebidaController = require('./controllers/BebidaController');
+
+const SnackController = require('./controllers/SnackController');
+const DrinksController = require('./controllers/DrinksController');
 const comboController = require('./controllers/ComboController');
 
-routes.get("/", lancheController.listarLanches),
-routes.post("/cadastrarLanche", lancheController.cadastrarLanches),
-routes.put("/alterarLanche/:id", lancheController.alterarLanches),
-routes.delete("/deletarLanche/:id", lancheController.deletarLanche),
+routes.get("/", SnackController.listSnacks),
+routes.post("/cadastrarLanche",  SnackController.registerSnacks),
+routes.put("/alterarLanche/:id",  SnackController.changeSnack),
+routes.delete("/deletarLanche/:id", SnackController.deleteSnack),
 
-routes.post("/cadastrarBebida", bebidaController.cadastrarBebida),
-routes.get("/bebidas", bebidaController.listarBedibas),
-routes.put("/alterarBebida/:id", bebidaController.alterarBebida),
-routes.delete("/deletarBebida/:id", bebidaController.deletarBebida),
+routes.post("/cadastrarBebida", DrinksController.registerDrink),
+routes.get("/bebidas", DrinksController.listDrinks),
+routes.put("/alterarBebida/:id", DrinksController.changeDrink),
+routes.delete("/deletarBebida/:id", DrinksController.deleteDrink),
 
-routes.post("/cadastrarCombo", comboController.cadastrarCombo),
-routes.get("/combos", comboController.listarCombos),
-routes.put("/alterarCombo/:id", comboController.alterarCombo),
-routes.delete("/deletarCombo/:id", comboController.deletatCombo),
-
+routes.post("/cadastrarCombo", comboController.registerCombo),
+routes.get("/combos", comboController.listCombo),
+routes.put("/alterarCombo/:id", comboController.changeCombo),
+routes.delete("/deletarCombo/:id", comboController.deleteCombo),
 
 module.exports = routes;

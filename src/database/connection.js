@@ -6,9 +6,6 @@ const sequelize = new Sequelize('hamburgueria', 'root', '123456', {
 });
 
 sequelize.authenticate();
-// console.log("CONEXÃO REALIZADA COM SUCESSO!");
-
-
 
 module.exports = sequelize;
 

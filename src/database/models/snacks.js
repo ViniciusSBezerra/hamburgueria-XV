@@ -2,7 +2,7 @@ const sequelize = require('../connection');
 
 const Sequelize = require('sequelize')
 
-const Lanches = sequelize.define('lanches', {
+const Snacks = sequelize.define('snacks', {
 
     id:{
         type: Sequelize.INTEGER,
@@ -10,22 +10,27 @@ const Lanches = sequelize.define('lanches', {
         allowNull: true,
         primaryKey: true
     },
+    
     name:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    preco:{
+    price:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    descricao:{
+    description:{
         type: Sequelize.STRING,
         allowNull: false
+    },
+    path:{
+        type: Sequelize.STRING,
+        
     }
 });
 
-Lanches.sync({ alter: true });
+Snacks.sync({ alter: true });
 
-module.exports = Lanches
+module.exports = Snacks

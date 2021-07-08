@@ -1,10 +1,10 @@
-const Bebida = require('../database/models/bebidas');
+const Drinks = require('../database/models/drinks');
 
 module.exports = {
 
-    async cadastrarBebida(req, res) {
-        const {name, preco} = req.body;
-        const verificarBedida = await Bebida.findOne({ name });
+    async registerDrink(req, res) {
+        const {name, price} = req.body;
+        const verificarBedida = await Drinks.findOne({ name });
 
         if(name == ""){
             return res.json({
@@ -12,7 +12,7 @@ module.exports = {
                 message: "ERRO! O NOME DA BEBIDA É OBRIGATORIO!"
             })
         }
-        else if(preco == ""){
+        else if(price == ""){
             return res.json({
                 error: true,
                 message: "ERRO! O PREÇO DA BEBIDA É OBRIGATORIO!"
@@ -24,7 +24,7 @@ module.exports = {
                 message: "ERRO! ESTA BEBIDA JÁ FOI CADASTRADO NO SISTEMA!"
             })
         }else{
-            await Bebida.create({name, preco})
+            await Drinks.create({name, price})
             .then(() => {
                 return res.json({
                     error: false,
@@ -34,18 +34,16 @@ module.exports = {
         }
     },
 
-    async listarBedibas(req, res){
-        await Bebida.findAll({}).then((bebidas) =>{
+    async listDrinks(req, res){
+        await Drinks.findAll({}).then((drinks) =>{
             return res.json({
-                message: "BEBIDAS: ",
-                bebidas
-                
+                drinks
             })
         })
     },
 
-    async deletarBebida(req, res){
-        await Bebida.destroy({ where: {id: req.params.id}}).then(() =>{
+    async deleteDrink(req, res){
+        await Drinks.destroy({ where: {id: req.params.id}}).then(() =>{
             return res.json({
                 error: false,
                 message: "BEBIDA DELETADA COM SUCESSO!"
@@ -53,10 +51,10 @@ module.exports = {
         })
     },
 
-    async alterarBebida(req, res){
+    async changeDrink(req, res){
         const {name, preco} = req.body;
 
-        await Bebida.update({name, preco}, {
+        await Drinks.update({name, preco}, {
             where: {id: req.params.id},
         }).then(() =>{
             return res.json({
@@ -65,6 +63,4 @@ module.exports = {
             })
         })
     }
-
-
 }

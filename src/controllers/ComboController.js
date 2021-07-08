@@ -1,12 +1,11 @@
 
-
 const Combo = require("../database/models/combos");
 
 module.exports = {
 
-    async cadastrarCombo(req, res) {
+    async registerCombo(req, res) {
 
-        const { name, lanche, batata, bebida, preco, descricao } = req.body;
+        const { name, snack, potato, drink, price, description } = req.body;
 
         if (name == "") {
             return res.json({
@@ -14,38 +13,38 @@ module.exports = {
                 message: "ERRO! O NOME DO COMBO É OBRIGATORIO!"
             })
         }
-        else if (lanche == "") {
+        else if (snack == "") {
             return res.json({
                 error: true,
                 message: "ERRO! O NOME DO LANCHE É OBRIGATORIO!"
             })
         }
-        else if (batata == "") {
+        else if (potato == "") {
             return res.json({
                 error: true,
                 message: "ERRO! O TAMANHO DA BATATA É OBRIGATORIO!"
             })
         }
-        else if (bebida == "") {
+        else if (drink == "") {
             return res.json({
                 error: true,
                 message: "ERRO! O NOME DA BEBIDA É OBRIGATORIO!"
             })
         }
-        else if (preco == "") {
+        else if (price == "") {
             return res.json({
                 error: true,
                 message: "ERRO! O PREÇO DO COMBO É OBRIGATORIO!"
             })
         }
-        else if (descricao == "") {
+        else if (description == "") {
             return res.json({
                 error: true,
                 message: "ERRO! A DESCRIÇÃO DO COMBO É OBRIGATORIA!"
             })
         }
         else {
-            await Combo.create({ name, lanche, batata, bebida, preco, descricao })
+            await Combo.create({ name, snack, potato, drink, price, description })
                 .then(() => {
                     return res.json({
                         error: false,
@@ -56,7 +55,7 @@ module.exports = {
 
     },
 
-    async listarCombos(req, res) {
+    async listCombo(req, res) {
         await Combo.findAll().then((combos) => {
             return res.json({
                 messages: "COMBOS CADASTRADOS",
@@ -65,7 +64,7 @@ module.exports = {
         });
     },
 
-    async deletatCombo(req, res) {
+    async deleteCombo(req, res) {
         await Combo.destroy({where: { id: req.params.id}})
         .then(()=>{
             return res.json({
@@ -75,11 +74,11 @@ module.exports = {
         })
     },
 
-    async alterarCombo(req, res){
+    async changeCombo(req, res){
 
-        const { name, lanche, batata, bebida, preco, descricao } = req.body;
+        const { name, snack, potato, drink, price, description } = req.body;
         
-        await Combo.update({name, lanche, batata, bebida, preco, descricao}, {
+        await Combo.update({name, snack, potato, drink, price, description}, {
             where: { id: req.params.id}
         })
         .then(() =>{
@@ -88,5 +87,4 @@ module.exports = {
             })
         })
     }
-
 }

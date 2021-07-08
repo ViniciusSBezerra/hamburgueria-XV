@@ -15,27 +15,27 @@ const Combos = sequelize.define('combos', {
         allowNull: false,
     },
 
-    lanche:{
+    snack:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    batata:{
+    potato:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    bebida:{
+    drink:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    preco:{
+    price:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    descricao:{
+    description:{
         type: Sequelize.STRING,
         allowNull: false
     }

@@ -2,7 +2,7 @@ const sequelize = require('../connection')
 
 const Sequelize = require('sequelize')
 
-const Bebidas = sequelize.define('bebidas', {
+const Drinks = sequelize.define('drinks', {
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -15,12 +15,12 @@ const Bebidas = sequelize.define('bebidas', {
         alowNull: false,
     },
 
-    preco: {
+    price: {
         type: Sequelize.STRING,
         alowNull: false,
     }
 });
 
-Bebidas.sync({ alter: true });
+Drinks.sync({ alter: true });
 
-module.exports = Bebidas
+module.exports = Drinks

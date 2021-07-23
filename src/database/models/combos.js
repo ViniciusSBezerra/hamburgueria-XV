@@ -1,8 +1,8 @@
-const sequelize = require('../connection');
+const sequelize = require("../connection");
 
-const Sequelize = require('sequelize')
+const Sequelize = require("sequelize");
 
-const Combos = sequelize.define('combos', {
+const Combos = sequelize.define("combos", {
 
     id:{
         type: Sequelize.INTEGER,

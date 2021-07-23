@@ -1,36 +1,29 @@
 const sequelize = require("../connection");
-
 const Sequelize = require("sequelize");
-
-const Snacks = sequelize.define("snacks", {
-
+const Admin = sequelize.define("admin", {
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: true,
+        alowNull: false,
         primaryKey: true
     },
-    
-    name:{
+
+    userName: {
         type: Sequelize.STRING,
-        allowNull: false,
+        alowNull: false,
     },
 
-    price:{
+    password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        alowNull: false,
     },
 
-    description:{
+    email: {
         type: Sequelize.STRING,
-        allowNull: false
-    },
-    path:{
-        type: Sequelize.STRING,
-        
+        alowNull: false,
     }
 });
 
-Snacks.sync({ alter: true });
+Admin.sync({ alter: true });
 
-module.exports = Snacks
+module.exports = Admin

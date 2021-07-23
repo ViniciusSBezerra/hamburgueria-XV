@@ -1,4 +1,4 @@
-const Drinks = require('../database/models/drinks');
+const Drinks = require("../database/models/drinks");
 
 module.exports = {
 

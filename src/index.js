@@ -1,9 +1,9 @@
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
 const port = 3333;
-const routes = require('../src/routes');
-const cors = require('cors');
-
+const routes = require("../src/routes");
+const cors = require("cors");
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");

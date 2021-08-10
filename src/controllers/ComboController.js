@@ -5,60 +5,66 @@ module.exports = {
 
     async registerCombo(req, res) {
 
-        const { name, snack, potato, drink, price, description } = req.body;
+        let { name, snack, potato, drink, price, description } = req.body;
+
+        const comboAlreadyExists = await Combo.findOne({ where : { name }})
+
+        if(comboAlreadyExists){
+            return res.json({
+                error: true,
+                message: "Erro: Combo já cadastrado!"
+            });
+        }
 
         if (name == "") {
             return res.json({
                 error: true,
-                message: "ERRO! O NOME DO COMBO É OBRIGATORIO!"
+                message: "Erro! Nome do combo é obrigatorio!"
             })
         }
-        else if (snack == "") {
+        if (snack == "") {
             return res.json({
                 error: true,
-                message: "ERRO! O NOME DO LANCHE É OBRIGATORIO!"
+                message: "Erro! Nome do lanche é obrigatorio!"
             })
         }
-        else if (potato == "") {
+        if (potato == "") {
             return res.json({
                 error: true,
-                message: "ERRO! O TAMANHO DA BATATA É OBRIGATORIO!"
+                message: "Erro! Tamanho da batata é obrigatorio!"
             })
         }
-        else if (drink == "") {
+        if (drink == "") {
             return res.json({
                 error: true,
-                message: "ERRO! O NOME DA BEBIDA É OBRIGATORIO!"
+                message: "Erro! Nome da bebida é obrigatorio!"
             })
         }
-        else if (price == "") {
+        if (price == "") {
             return res.json({
                 error: true,
-                message: "ERRO! O PREÇO DO COMBO É OBRIGATORIO!"
+                message: "Erro! O preço do combo é obrigatorio!"
             })
         }
-        else if (description == "") {
+        if (description == "") {
             return res.json({
                 error: true,
-                message: "ERRO! A DESCRIÇÃO DO COMBO É OBRIGATORIA!"
+                message: "Erro! A descrição do combo é obrigatorio!"
             })
         }
-        else {
-            await Combo.create({ name, snack, potato, drink, price, description })
-                .then(() => {
-                    return res.json({
-                        error: false,
-                        message: "COMBO CADASTRADO COM SUCESSO!"
-                    })
+        
+        await Combo.create({ name, snack, potato, drink, price, description })
+            .then(() => {
+                return res.json({
+                    error: false,
+                    message: "Combo cadastrado com sucesso!"
                 })
-        }
-
+            })
     },
 
     async listCombo(req, res) {
         await Combo.findAll().then((combos) => {
             return res.json({
-                messages: "COMBOS CADASTRADOS",
                 combos
             });
         });
@@ -69,12 +75,12 @@ module.exports = {
         .then(()=>{
             return res.json({
                 error: false,
-                message: "COMBO DELETADO COM SUCESSO!"
+                message: "Combo deletado com sucesso!"
             })
         })
     },
 
-    async changeCombo(req, res){
+    async updateCombo(req, res){
 
         const { name, snack, potato, drink, price, description } = req.body;
         
@@ -83,7 +89,7 @@ module.exports = {
         })
         .then(() =>{
             return res.json({
-                message: "COMBO ALTERADO COM SUCESSO!"
+                message: "Combo alterado com sucesso!"
             })
         })
     }

@@ -2,8 +2,8 @@ const routes = require('express').Router();
 
 const SnackController = require('./controllers/SnackController');
 const DrinksController = require('./controllers/DrinksController');
-const comboController = require('./controllers/ComboController');
-const testeLogin = require('./controllers/AdminController')
+const ComboController = require('./controllers/ComboController');
+const AdminController = require('./controllers/AdminController');
 const login = require('./controllers/LoginController');
 
 const auth = require("./controllers/autenticacaoController");
@@ -15,18 +15,18 @@ routes.delete("/deletarLanche/:id", SnackController.deleteSnack),
 
 routes.post("/cadastrarBebida", DrinksController.registerDrink),
 routes.get("/bebidas", DrinksController.listDrinks),
-routes.put("/alterarBebida/:id", DrinksController.changeDrink),
+routes.put("/alterarBebida/:id", DrinksController.updateDrink),
 routes.delete("/deletarBebida/:id", DrinksController.deleteDrink),
 
-routes.post("/cadastrarCombo", comboController.registerCombo),
-routes.get("/combos", comboController.listCombo),
-routes.put("/alterarCombo/:id", comboController.changeCombo),
-routes.delete("/deletarCombo/:id", comboController.deleteCombo),
+routes.post("/cadastrarCombo", ComboController.registerCombo),
+routes.get("/combos", ComboController.listCombo),
+routes.put("/alterarCombo/:id", ComboController.updateCombo),
+routes.delete("/deletarCombo/:id", ComboController.deleteCombo),
 
-routes.post("/createAdmin", testeLogin.createAdmin)
-
-routes.get("/listAdmin", auth.auth, testeLogin.listAdmin)
-routes.delete("/deleteAdmin/:id", testeLogin.deleteAdmin)
+routes.post("/createAdmin",  AdminController.createAdmin);
+routes.get("/listAdmin", auth.auth, AdminController.listAdmin);
+routes.delete("/deleteAdmin/:id", AdminController.deleteAdmin);
+routes.put("/updateAdmin/:id", AdminController.updateAdmin);
 
 routes.post("/login", login.Login)
 

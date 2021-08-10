@@ -5,7 +5,7 @@ const jsonwebtoken = require("jsonwebtoken");
 module.exports = {
 
     async Login(req, res) {
-        const { userName, email, password } = req.body
+        const { userName, password } = req.body
         const admin = await Admin.findOne({
             atributes: ['id', 'userName', 'password'],
             where: {
@@ -16,14 +16,14 @@ module.exports = {
         if (admin === null) {
             return res.status(400).json({
                 error: true,
-                message: "Erro: username ou senha incorreto!"
+                message: "Erro: Username ou password incorreto!"
             })
         }
 
         if (!(await bcrypt.compare(password, admin.password))) {
             return res.status(400).json({
                 error: true,
-                message: "Erro: username ou senha incorreto!"
+                message: "Erro: Username ou password incorreto!"
             })
         }
 
@@ -32,7 +32,7 @@ module.exports = {
         })
 
         return res.json({
-            message: "username encontrado!",
+            message: "Username encontrado!",
             token
         })
     }

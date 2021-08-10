@@ -3,11 +3,9 @@ const multer = require("multer");
 const multerConfig = require("../config/MulterConfig");
 const upload = multer(multerConfig).single("file");
 
-
 module.exports = {
 
     async listSnacks(req, res) {
-
         await Snacks.findAll().then((snacks) => {
             return res.json({
                 snacks
@@ -16,7 +14,6 @@ module.exports = {
     },
 
     async registerSnacks(req, res) {
-
         upload(req, res, (err) => {
 
             const { name, price, description } = req.body;
@@ -27,53 +24,47 @@ module.exports = {
                     message: "Não é possivel cadastrar um lanche sem nome!"
                 });
             }
-            else if (price == "") {
+            if (price == "") {
                 return res.json({
                     message: "Não é possivel cadastrar um lanche sem preço!"
                 });
 
             }
-            else if (description == "") {
+            if (description == "") {
                 return res.json({
                     message: "Não é possivel cadastrar um lanche sem descrição!"
                 });
             }
-
-            else{
-               
-                Snacks.create({ name, price, description, path }).then(() => {
-                    return res.json({
-                        message: "Lanche cadastrado com sucesso!"
-                    });
+            Snacks.create({ name, price, description, path }).then(() => {
+                return res.json({
+                    message: "Lanche cadastrado com sucesso!"
                 });
-            }
-
-        })
+            });
+        });
     },
 
     async changeSnack(req, res) {
         const { name, price, description } = req.body;
 
-        await Snacks.update({ name, price, description }, {
+        await Snacks.update({
+            name,
+            price,
+            description
+        },{
             where: { id: req.params.id },
         }).then(() => {
             return res.json({
-                message: "Snacks ALTERADO COM SUCESSO!"
+                message: "Lanche alterado com sucesso!"
             })
         })
-
-
     },
 
     async deleteSnack(req, res) {
-
         await Snacks.destroy({ where: { id: req.params.id } }).then(() => {
             return res.json({
                 error: false,
-                message: "Snacks APAGADO COM SUCESSO!"
+                message: "Lanche apagado com sucesso!"
             })
         })
-
-
     },
 }

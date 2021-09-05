@@ -1,6 +1,6 @@
 const Admin = require("../database/models/admin");
 const bcrypt = require("bcrypt");
-const jsonwebtoken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
 
@@ -27,12 +27,12 @@ module.exports = {
             })
         }
 
-        const token = jsonwebtoken.sign({ id: admin.id }, process.env.key, {
+        const token = jwt.sign({ id: admin.id }, process.env.key, {
             expiresIn: '7d'
         })
 
         return res.json({
-            message: "Username encontrado!",
+            message: "Login realizado com sucesso!",
             token
         })
     }

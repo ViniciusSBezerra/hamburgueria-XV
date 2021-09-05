@@ -1,12 +1,17 @@
 const Snacks = require("../database/models/snacks");
-const multer = require("multer");
-const multerConfig = require("../config/MulterConfig");
-const upload = multer(multerConfig).single("file");
 
 module.exports = {
 
     async listSnacks(req, res) {
         await Snacks.findAll().then((snacks) => {
+
+            if(snacks == ""){
+                return res.json({
+                    error: true,
+                    message: "Erro: Lanches não encontrados!"
+                })
+            }
+
             return res.json({
                 snacks
             });
@@ -14,31 +19,30 @@ module.exports = {
     },
 
     async registerSnacks(req, res) {
-        upload(req, res, (err) => {
-
-            const { name, price, description } = req.body;
-            const { path } = req.file;
+      
+            
+        const { name, price, description } = req.body;
+            
         
-            if (name == "") {
-                return res.json({
-                    message: "Não é possivel cadastrar um lanche sem nome!"
-                });
-            }
-            if (price == "") {
-                return res.json({
-                    message: "Não é possivel cadastrar um lanche sem preço!"
-                });
+        if (name == "") {
+            return res.json({
+                message: "Não é possivel cadastrar um lanche sem nome!"
+            });
+        }
+        if (price == "") {
+            return res.json({
+                message: "Não é possivel cadastrar um lanche sem preço!"
+            });
 
-            }
-            if (description == "") {
-                return res.json({
-                    message: "Não é possivel cadastrar um lanche sem descrição!"
-                });
-            }
-            Snacks.create({ name, price, description, path }).then(() => {
-                return res.json({
-                    message: "Lanche cadastrado com sucesso!"
-                });
+        }
+        if (description == "") {
+            return res.json({
+                message: "Não é possivel cadastrar um lanche sem descrição!"
+            });
+        }
+        Snacks.create({ name, price, description }).then(() => {
+            return res.json({
+                message: "Lanche cadastrado com sucesso!"
             });
         });
     },
